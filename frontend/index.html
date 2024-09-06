@@ -32,4 +32,16 @@
             const downloadLink = data.download_link;
 
             // Display download link
-            document.getElementById('download-link').innerHTML
+            document.getElementById('download-link').innerHTML = `<a href="http://localhost:5000/download/${downloadLink}" download>Download Video</a>`;
+
+            // Display video player
+            document.getElementById('video-player').innerHTML = `
+                <video width="600" controls>
+                    <source src="http://localhost:5000/stream/${downloadLink}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+        });
+    </script>
+</body>
+</html>
