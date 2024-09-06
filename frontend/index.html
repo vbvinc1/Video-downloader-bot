@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
+</head>
+<body>
+    <form id="download-form">
+        <input type="text" id="url" placeholder="Enter video URL" required>
+        <select id="quality">
+            <option value="best">Best</option>
+            <option value="720p">720p</option>
+            <option value="480p">480p</option>
+        </select>
+        <button type="submit">Download</button>
+    </form>
+    <div id="download-link"></div>
+
+    <script>
+        document.getElementById('download-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const url = document.getElementById('url').value;
+            const quality = document.getElementById('quality').value;
+            const response = await fetch('http://localhost:5000/download', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url, quality })
+            });
+            const data = await response.json();
+            document.getElementById('download-link').innerHTML = `<a href="${data.download_link}">Download Video</a>`;
+        });
+    </script>
+</body>
+</html>
