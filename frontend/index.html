@@ -16,6 +16,7 @@
         <button type="submit">Download</button>
     </form>
     <div id="download-link"></div>
+    <div id="video-player"></div>
 
     <script>
         document.getElementById('download-form').addEventListener('submit', async function(e) {
@@ -28,8 +29,7 @@
                 body: JSON.stringify({ url, quality })
             });
             const data = await response.json();
-            document.getElementById('download-link').innerHTML = `<a href="${data.download_link}">Download Video</a>`;
-        });
-    </script>
-</body>
-</html>
+            const downloadLink = data.download_link;
+
+            // Display download link
+            document.getElementById('download-link').innerHTML
